@@ -1,6 +1,6 @@
 {
   "name": "firebase-apparatus",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Lightweight implementation of firebase-tools as a Node module",
   "main": "lib/index.js",
   "repository": {

@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { ProviderId } from './types';
+import type { ProviderId } from '../types';
 
 // Allowed exported providers
 export const EXPORTED_PROVIDERS: ProviderId[] = [

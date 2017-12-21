@@ -1,8 +1,8 @@
 /* @flow */
 
 import transformUser from './transformUser';
-import type Apparatus from '..';
-import type { AuthUser } from './types';
+import type Apparatus from '../..';
+import type { AuthUser } from '../types';
 
 /*
  * Run auth:export on Google API

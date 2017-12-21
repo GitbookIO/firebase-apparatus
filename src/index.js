@@ -2,8 +2,8 @@
 
 import 'babel-polyfill';
 import { GoogleApi } from './apis';
-import authExport from './authExport';
-import type { AuthUser } from './authExport/types';
+import { authExport } from './auth';
+import type { AuthUser } from './auth/types';
 
 // Parameters for the Apparatus instance
 type Params = {

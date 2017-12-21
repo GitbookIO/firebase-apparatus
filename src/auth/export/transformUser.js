@@ -8,7 +8,7 @@ import {
     BASE64_KEYS
 } from './constants';
 import convertToNormalBase64 from './convertToNormalBase64';
-import type { GoogleUser, AuthUser } from './types';
+import type { GoogleUser, AuthUser } from '../types';
 
 /*
  * Transform Google users to the <AuthUser> type
@@ -30,6 +30,7 @@ function transformUser(googleUser: GoogleUser): AuthUser {
 
         // Rename key
         const newKey = RENAMED_KEYS[key] || key;
+        // $FlowFixMe
         user[newKey] = newValue;
     });
 

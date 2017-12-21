@@ -1,9 +1,15 @@
 {
   "name": "firebase-apparatus",
   "version": "1.0.0",
-  "description": "firebase-tools for winners",
+  "description": "Lightweight implementation of firebase-tools as a module",
   "main": "lib/index.js",
-  "repository": "https://github.com/GitbookIO/firebase-apparatus.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GitbookIO/firebase-apparatus.git"
+  },
+  "bugs": {
+      "url": "https://github.com/GitbookIO/firebase-apparatus/issues"
+  },
   "author": "jpreynat <johan.preynat@gmail.com>",
   "license": "Apache-2.0",
   "devDependencies": {
@@ -28,5 +34,12 @@
   "dependencies": {
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0"
-  }
+  },
+  "keywords": [
+    "node",
+    "firebase",
+    "tools",
+    "apparatus",
+    "module"
+  ]
 }

@@ -41,16 +41,18 @@ function transformUser(googleUser: GoogleUser): AuthUser {
     }
 
     // Filter out and map providerUserInfo
-    user.providerUserInfo = googleUser.providerUserInfo
-        .filter(({ providerId }) => ALLOWED_PROVIDERS.includes(providerId))
-        .map(googleProviderInfo => {
-            const providerInfo = {};
-            ALLOWED_PROVIDERS_KEYS.forEach(key => {
-                providerInfo[key] = googleProviderInfo[key];
-            });
+    if (googleUser.providerUserInfo) {
+        user.providerUserInfo = googleUser.providerUserInfo
+            .filter(({ providerId }) => ALLOWED_PROVIDERS.includes(providerId))
+            .map(googleProviderInfo => {
+                const providerInfo = {};
+                ALLOWED_PROVIDERS_KEYS.forEach(key => {
+                    providerInfo[key] = googleProviderInfo[key];
+                });
 
-            return providerInfo;
-        });
+                return providerInfo;
+            });
+    }
 
     // $FlowFixMe
     return user;

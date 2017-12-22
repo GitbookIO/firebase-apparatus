@@ -14,21 +14,25 @@ function validateUser(user: AuthUser): void {
         }
     });
 
-    user.providerUserInfo.forEach(providerInfo => {
-        if (!ALLOWED_PROVIDERS.includes(providerInfo.providerId)) {
-            throw new Error(
-                `Trying to import invalid provider ${providerInfo.providerId}`
-            );
-        }
-
-        Object.keys(providerInfo).forEach(key => {
-            if (!ALLOWED_PROVIDERS_KEYS.includes(key)) {
+    if (user.providerUserInfo) {
+        user.providerUserInfo.forEach(providerInfo => {
+            if (!ALLOWED_PROVIDERS.includes(providerInfo.providerId)) {
                 throw new Error(
-                    `Trying to import invalid providerUserInfo key ${key}`
+                    `Trying to import invalid provider ${
+                        providerInfo.providerId
+                    }`
                 );
             }
+
+            Object.keys(providerInfo).forEach(key => {
+                if (!ALLOWED_PROVIDERS_KEYS.includes(key)) {
+                    throw new Error(
+                        `Trying to import invalid providerUserInfo key ${key}`
+                    );
+                }
+            });
         });
-    });
+    }
 }
 
 export default validateUser;

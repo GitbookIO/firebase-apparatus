@@ -2,8 +2,8 @@
 
 import 'babel-polyfill';
 import { GoogleApi } from './apis';
-import { authExport } from './auth';
-import type { AuthUser } from './auth/types';
+import { authExport, authImport } from './auth';
+import type { AuthUser, HashOptions } from './auth/types';
 
 // Parameters for the Apparatus instance
 type Params = {
@@ -37,6 +37,16 @@ class Apparatus {
      */
     async authExport(): Promise<AuthUser[]> {
         return authExport(this);
+    }
+
+    /*
+     * Run the equivalent of auth:import command
+     */
+    async authImport(
+        users: AuthUser[],
+        hashOptions: HashOptions
+    ): Promise<void> {
+        return authImport(this, users, hashOptions);
     }
 }
 

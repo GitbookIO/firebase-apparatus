@@ -1,6 +1,7 @@
 /* @flow */
 
 import toWebSafeBase64 from './toWebSafeBase64';
+import validateUser from './validateUser';
 import {
     ALLOWED_PROVIDERS,
     ALLOWED_PROVIDERS_KEYS,
@@ -14,6 +15,10 @@ import type { AuthUser, GoogleUser } from '../types';
  * Transform an <AuthUser> to a Google API user
  */
 function transformUser(user: AuthUser): GoogleUser {
+    // Validate user before transform
+    validateUser(user);
+
+    // Convert user
     const googleUser = {};
     IMPORT_KEYS.forEach(key => {
         // Encode key if needed

@@ -1,6 +1,5 @@
 /* @flow */
 
-import 'babel-polyfill';
 import { GoogleApi } from './apis';
 import { authExport, authImport } from './auth';
 import type { AuthUser, HashOptions } from './auth/types';

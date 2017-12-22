@@ -55,7 +55,7 @@ async function authImport(
     // Result accumulator to iterate
     users: AuthUser[],
     // Hash options
-    hashOptions: HashOptions
+    hashOptions?: HashOptions = {}
 ): Promise<void> {
     // Validate options and transform for Google API
     const googleHashOpts = transformHashOptions(hashOptions);

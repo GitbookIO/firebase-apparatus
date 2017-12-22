@@ -44,7 +44,7 @@ class Apparatus {
      */
     async authImport(
         users: AuthUser[],
-        hashOptions: HashOptions
+        hashOptions?: HashOptions = {}
     ): Promise<void> {
         return authImport(this, users, hashOptions);
     }

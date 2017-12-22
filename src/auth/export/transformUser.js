@@ -18,7 +18,7 @@ function transformUser(googleUser: GoogleUser): AuthUser {
     EXPORT_KEYS.forEach(key => {
         const googleValue = googleUser[key];
         // Ignore missing value
-        if (!googleValue) {
+        if (typeof googleValue === 'undefined') {
             return;
         }
 

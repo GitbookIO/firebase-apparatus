@@ -23,7 +23,7 @@ function transformUser(user: AuthUser): GoogleUser {
     IMPORT_KEYS.forEach(key => {
         const value = user[key];
         // Ignore missing value
-        if (!value) {
+        if (typeof value === 'undefined') {
             return;
         }
 

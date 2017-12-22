@@ -29,7 +29,10 @@
   },
   "scripts": {
     "build": "rm -rf lib/ && babel src -d lib",
-    "prepublish": "yarn run build"
+    "prepublish": "yarn run test && yarn run build",
+    "test": "yarn run test:lint && yarn run test:flow",
+    "test:lint": "eslint src/",
+    "test:flow": "flow"
   },
   "dependencies": {
     "axios": "^0.17.1",

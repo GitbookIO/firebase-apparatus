@@ -16,8 +16,13 @@ import type { GoogleUser, AuthUser } from '../types';
 function transformUser(googleUser: GoogleUser): AuthUser {
     const user = {};
     EXPORT_KEYS.forEach(key => {
-        // Encode key if needed
         const googleValue = googleUser[key];
+        // Ignore missing value
+        if (!googleValue) {
+            return;
+        }
+
+        // Encode value if needed
         const newValue =
             BASE64_KEYS.includes(key) && typeof googleValue === 'string'
                 ? convertToNormalBase64(googleValue)

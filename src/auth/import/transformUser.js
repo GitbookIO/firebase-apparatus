@@ -21,8 +21,13 @@ function transformUser(user: AuthUser): GoogleUser {
     // Convert user
     const googleUser = {};
     IMPORT_KEYS.forEach(key => {
-        // Encode key if needed
         const value = user[key];
+        // Ignore missing value
+        if (!value) {
+            return;
+        }
+
+        // Encode key if needed
         const googleValue =
             BASE64_KEYS.includes(key) && typeof value === 'string'
                 ? toWebSafeBase64(value)

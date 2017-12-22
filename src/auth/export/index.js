@@ -1,6 +1,7 @@
 /* @flow */
 
 import transformUser from './transformUser';
+import { MAX_BATCH_SIZE } from '../constants';
 import type Apparatus from '../..';
 import type { AuthUser } from '../types';
 
@@ -17,7 +18,7 @@ async function authExport(
     // Payload for the API
     const data = {
         targetProjectId: apparatus.projectId,
-        maxResults: 1000,
+        maxResults: MAX_BATCH_SIZE,
         ...(nextPage ? { nextPageToken: nextPage } : {})
     };
 

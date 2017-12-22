@@ -4,10 +4,51 @@ import transformUser from './transformUser';
 import transformHashOptions from './transformHashOptions';
 import { MAX_BATCH_SIZE } from '../constants';
 import type Apparatus from '../..';
-import type { AuthUser, HashOptions } from '../types';
+import type {
+    AuthUser,
+    GoogleUser,
+    HashOptions,
+    GoogleHashOptions
+} from '../types';
 
 /*
  * Run auth:import on Google API
+ */
+async function serialAuthImport(
+    apparatus: Apparatus,
+    // Result accumulator to iterate
+    googleUsers: GoogleUser[],
+    // Hash options
+    googleHashOpts: GoogleHashOptions
+): Promise<void> {
+    // Split the users array to max batch size
+    const usersToUpload = googleUsers.slice(0, MAX_BATCH_SIZE);
+    const remainingUsers = googleUsers.slice(MAX_BATCH_SIZE);
+
+    // No users to upload, we're done
+    if (!usersToUpload.length) {
+        return;
+    }
+
+    // Payload for the API
+    const data = {
+        ...googleHashOpts,
+        targetProjectId: apparatus.projectId,
+        users: usersToUpload
+    };
+
+    // Import users
+    await apparatus.googleApi.post(
+        '/identitytoolkit/v3/relyingparty/uploadAccount',
+        data
+    );
+
+    // Import remaning users
+    await serialAuthImport(apparatus, remainingUsers, googleHashOpts);
+}
+
+/*
+ * Validate options and launch import
  */
 async function authImport(
     apparatus: Apparatus,
@@ -19,30 +60,10 @@ async function authImport(
     // Validate options and transform for Google API
     const googleHashOpts = transformHashOptions(hashOptions);
 
-    // Split the users array to max batch size
-    const usersToUpload = users.slice(0, MAX_BATCH_SIZE);
-    const remainingUsers = users.slice(MAX_BATCH_SIZE);
+    // Validate and transform users
+    const googleUsers = users.map(transformUser);
 
-    // No users to upload, we're done
-    if (!usersToUpload.length) {
-        return;
-    }
-
-    // Payload for the API
-    const data = {
-        ...googleHashOpts,
-        targetProjectId: apparatus.projectId,
-        users: usersToUpload.map(transformUser)
-    };
-
-    // Import users
-    await apparatus.googleApi.post(
-        '/identitytoolkit/v3/relyingparty/uploadAccount',
-        data
-    );
-
-    // Import remaning users
-    await authImport(apparatus, remainingUsers, hashOptions);
+    await serialAuthImport(apparatus, googleUsers, googleHashOpts);
 }
 
 export default authImport;

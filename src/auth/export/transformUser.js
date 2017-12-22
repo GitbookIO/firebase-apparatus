@@ -1,10 +1,10 @@
 /* @flow */
 
 import {
-    EXPORTED_KEYS,
-    EXPORTED_PROVIDERS,
-    EXPORTED_PROVIDERS_KEYS,
-    EXPORTED_RENAMED_KEYS,
+    EXPORT_KEYS,
+    ALLOWED_PROVIDERS,
+    ALLOWED_PROVIDERS_KEYS,
+    EXPORT_RENAMED_KEYS,
     BASE64_KEYS
 } from '../constants';
 import convertToNormalBase64 from './convertToNormalBase64';
@@ -20,7 +20,7 @@ function transformUser(googleUser: GoogleUser): AuthUser {
     } = googleUser;
 
     const user = {};
-    EXPORTED_KEYS.forEach(key => {
+    EXPORT_KEYS.forEach(key => {
         // Encode key if needed
         const googleValue = googleInfos[key];
         const newValue =
@@ -29,7 +29,7 @@ function transformUser(googleUser: GoogleUser): AuthUser {
                 : googleValue;
 
         // Rename key
-        const newKey = EXPORTED_RENAMED_KEYS[key] || key;
+        const newKey = EXPORT_RENAMED_KEYS[key] || key;
         // $FlowFixMe
         user[newKey] = newValue;
     });
@@ -42,10 +42,10 @@ function transformUser(googleUser: GoogleUser): AuthUser {
 
     // Filter out and map providerUserInfo
     user.providerUserInfo = googleProviderUserInfo
-        .filter(({ providerId }) => EXPORTED_PROVIDERS.includes(providerId))
+        .filter(({ providerId }) => ALLOWED_PROVIDERS.includes(providerId))
         .map(googleProviderInfo => {
             const providerInfo = {};
-            EXPORTED_PROVIDERS_KEYS.forEach(key => {
+            ALLOWED_PROVIDERS_KEYS.forEach(key => {
                 providerInfo[key] = googleProviderInfo[key];
             });
 

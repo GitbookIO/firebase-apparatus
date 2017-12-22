@@ -3,7 +3,7 @@
 import type { ProviderId } from './types';
 
 // Allowed exported providers
-export const EXPORTED_PROVIDERS: ProviderId[] = [
+export const ALLOWED_PROVIDERS: ProviderId[] = [
     'google.com',
     'facebook.com',
     'twitter.com',
@@ -11,7 +11,7 @@ export const EXPORTED_PROVIDERS: ProviderId[] = [
 ];
 
 // Exported keys for <providerUserInfo> users elements
-export const EXPORTED_PROVIDERS_KEYS = [
+export const ALLOWED_PROVIDERS_KEYS = [
     'providerId',
     'rawId',
     'email',
@@ -20,7 +20,7 @@ export const EXPORTED_PROVIDERS_KEYS = [
 ];
 
 // Exported keys from the Google API
-export const EXPORTED_KEYS = [
+export const EXPORT_KEYS = [
     'localId',
     'email',
     'emailVerified',
@@ -34,7 +34,12 @@ export const EXPORTED_KEYS = [
 ];
 
 // Renamed keys at export
-export const EXPORTED_RENAMED_KEYS: { [string]: string } = {
+export const EXPORT_RENAMED_KEYS: { [string]: string } = {
+    lastLoginAt: 'lastSignedInAt'
+};
+
+// Renamed keys at import
+export const IMPORT_RENAMED_KEYS: { [string]: string } = {
     lastLoginAt: 'lastSignedInAt'
 };
 

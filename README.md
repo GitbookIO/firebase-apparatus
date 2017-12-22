@@ -65,7 +65,7 @@ export type AuthUser = {
 
 ```js
 // Array of <AuthUser> to import
-const users: AuthUser[] = ...;
+const users: AuthUser[] = [ { ... } ];
 // Optional hash options for password import
 const hashOptions: HashOptions = { ... };
 

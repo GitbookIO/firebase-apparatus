@@ -1,11 +1,13 @@
 /* @flow */
 
+// Accepted providers IDs
 export type ProviderId =
     | 'google.com'
     | 'facebook.com'
     | 'twitter.com'
     | 'github.com';
 
+// Type for an auth provider's infos
 export type ProviderUserInfo = {
     providerId: ProviderId,
     rawId: string,
@@ -14,7 +16,7 @@ export type ProviderUserInfo = {
     photoUrl?: string
 };
 
-// Return type for the exportUsers method
+// Input and output type for an auth user
 export type AuthUser = {
     localId: string,
     email: string,
@@ -29,6 +31,7 @@ export type AuthUser = {
     providerUserInfo: ProviderUserInfo[]
 };
 
+// Returned provider infos by the Google API
 export type GoogleProviderUserInfo = {
     providerId: ProviderId,
     displayName: string,
@@ -39,7 +42,7 @@ export type GoogleProviderUserInfo = {
     screenName?: string
 };
 
-// Google user received from the API
+// Returned user infos by the Google API
 export type GoogleUser = {
     localId: string,
     email: string,

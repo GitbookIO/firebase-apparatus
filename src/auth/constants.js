@@ -30,7 +30,8 @@ export const EXPORT_KEYS = [
     'photoUrl',
     'lastLoginAt',
     'createdAt',
-    'phoneNumber'
+    'phoneNumber',
+    'providerUserInfo'
 ];
 
 // Renamed keys at export
@@ -49,7 +50,8 @@ export const IMPORT_KEYS = [
     'photoUrl',
     'lastSignedInAt',
     'createdAt',
-    'phoneNumber'
+    'phoneNumber',
+    'providerUserInfo'
 ];
 
 // Renamed keys at import

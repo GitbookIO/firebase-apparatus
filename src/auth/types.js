@@ -19,16 +19,16 @@ export type ProviderUserInfo = {
 // Input and output type for an auth user
 export type AuthUser = {
     localId: string,
-    email: string,
-    emailVerified: boolean,
-    displayName: string,
-    photoUrl: string,
+    email?: string,
+    emailVerified?: boolean,
+    displayName?: string,
+    photoUrl?: string,
     passwordHash?: string,
     salt?: string,
     createdAt?: string,
     lastSignedInAt?: string,
     phoneNumber?: string,
-    providerUserInfo: ProviderUserInfo[]
+    providerUserInfo?: ProviderUserInfo[]
 };
 
 // Returned provider infos by the Google API
@@ -45,10 +45,10 @@ export type GoogleProviderUserInfo = {
 // Returned user infos by the Google API
 export type GoogleUser = {
     localId: string,
-    email: string,
-    emailVerified: boolean,
-    displayName: string,
-    photoUrl: string,
+    email?: string,
+    emailVerified?: boolean,
+    displayName?: string,
+    photoUrl?: string,
     passwordHash?: string,
     salt?: string,
     version?: number,
@@ -60,7 +60,7 @@ export type GoogleUser = {
     validSince?: string,
     customAuth?: boolean,
     customAttributes?: string,
-    providerUserInfo: GoogleProviderUserInfo[]
+    providerUserInfo?: GoogleProviderUserInfo[]
 };
 
 // Options for the auth:import hash algorithm

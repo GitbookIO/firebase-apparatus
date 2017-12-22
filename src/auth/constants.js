@@ -38,9 +38,23 @@ export const EXPORT_RENAMED_KEYS: { [string]: string } = {
     lastLoginAt: 'lastSignedInAt'
 };
 
+// Imported keys for the Google API
+export const IMPORT_KEYS = [
+    'localId',
+    'email',
+    'emailVerified',
+    'passwordHash',
+    'salt',
+    'displayName',
+    'photoUrl',
+    'lastSignedInAt',
+    'createdAt',
+    'phoneNumber'
+];
+
 // Renamed keys at import
 export const IMPORT_RENAMED_KEYS: { [string]: string } = {
-    lastLoginAt: 'lastSignedInAt'
+    lastSignedInAt: 'lastLoginAt'
 };
 
 // Keys needing base64 re-encoding

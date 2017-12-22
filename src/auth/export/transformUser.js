@@ -4,9 +4,9 @@ import {
     EXPORTED_KEYS,
     EXPORTED_PROVIDERS,
     EXPORTED_PROVIDERS_KEYS,
-    RENAMED_KEYS,
+    EXPORTED_RENAMED_KEYS,
     BASE64_KEYS
-} from './constants';
+} from '../constants';
 import convertToNormalBase64 from './convertToNormalBase64';
 import type { GoogleUser, AuthUser } from '../types';
 
@@ -29,7 +29,7 @@ function transformUser(googleUser: GoogleUser): AuthUser {
                 : googleValue;
 
         // Rename key
-        const newKey = RENAMED_KEYS[key] || key;
+        const newKey = EXPORTED_RENAMED_KEYS[key] || key;
         // $FlowFixMe
         user[newKey] = newValue;
     });

@@ -14,15 +14,10 @@ import type { GoogleUser, AuthUser } from '../types';
  * Transform Google users to the <AuthUser> type
  */
 function transformUser(googleUser: GoogleUser): AuthUser {
-    const {
-        providerUserInfo: googleProviderUserInfo,
-        ...googleInfos
-    } = googleUser;
-
     const user = {};
     EXPORT_KEYS.forEach(key => {
         // Encode key if needed
-        const googleValue = googleInfos[key];
+        const googleValue = googleUser[key];
         const newValue =
             BASE64_KEYS.includes(key) && typeof googleValue === 'string'
                 ? convertToNormalBase64(googleValue)
@@ -41,7 +36,7 @@ function transformUser(googleUser: GoogleUser): AuthUser {
     }
 
     // Filter out and map providerUserInfo
-    user.providerUserInfo = googleProviderUserInfo
+    user.providerUserInfo = googleUser.providerUserInfo
         .filter(({ providerId }) => ALLOWED_PROVIDERS.includes(providerId))
         .map(googleProviderInfo => {
             const providerInfo = {};

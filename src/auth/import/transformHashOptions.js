@@ -3,7 +3,7 @@
 import toWebSafeBase64 from './toWebSafeBase64';
 import type { HashOptions, GoogleHashOptions } from '../types';
 
-function validateHashOptions(options: HashOptions): GoogleHashOptions {
+function transformHashOptions(options: HashOptions): GoogleHashOptions {
     if (!options.hashAlgo) {
         return {};
     }
@@ -86,4 +86,4 @@ function validateHashOptions(options: HashOptions): GoogleHashOptions {
     }
 }
 
-export default validateHashOptions;
+export default transformHashOptions;

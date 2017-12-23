@@ -36,7 +36,8 @@
     "test:flow": "flow"
   },
   "dependencies": {
-    "axios": "^0.17.1"
+    "axios": "^0.17.1",
+    "babel-runtime": "^6.26.0"
   },
   "keywords": [
     "node",

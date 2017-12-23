@@ -19,10 +19,10 @@ class Apparatus {
 
     constructor({ projectId, token }: ApparatusParameters) {
         if (!projectId) {
-            throw new Error('Missing projectId parameter');
+            throw new Error('Missing "projectId" parameter');
         }
         if (!token) {
-            throw new Error('Missing token parameter');
+            throw new Error('Missing "token" parameter');
         }
 
         this.projectId = projectId;
@@ -47,6 +47,10 @@ class Apparatus {
         users: AuthUser[],
         hashOptions?: HashOptions = {}
     ): Promise<void> {
+        if (!users) {
+            throw new Error('Missing "users" parameter');
+        }
+
         return authImport(this, users, hashOptions);
     }
 }

@@ -25,19 +25,39 @@ const apparatus = new Apparatus({
 });
 ```
 
-### .authExport()
+```js
+/*
+new Apparatus(
+    ApparatusParameters
+): Apparatus
+
+type ApparatusParameters = {
+    // Firebase project ID
+    projectId: string,
+    // Firebase CI token with access to projectId
+    token: string
+};
+ */
+```
+
+### `.authExport()`
 
 ```js
 const users: AuthUser[] = await apparatus.authExport();
+```
 
+```js
 /*
+apparatus.authExport(
+): Promise<AuthUser[]>
+
 type ProviderId =
     | 'google.com'
     | 'facebook.com'
     | 'twitter.com'
     | 'github.com';
 
-export type ProviderUserInfo = {
+type ProviderUserInfo = {
     providerId: ProviderId,
     rawId?: string,
     email?: string,
@@ -45,7 +65,7 @@ export type ProviderUserInfo = {
     photoUrl?: string
 };
 
-export type AuthUser = {
+type AuthUser = {
     localId: string,
     email?: string,
     emailVerified?: boolean,
@@ -61,7 +81,7 @@ export type AuthUser = {
  */
 ```
 
-### .authImport()
+### `.authImport()`
 
 ```js
 // Array of <AuthUser> to import
@@ -70,8 +90,15 @@ const users: AuthUser[] = [ { ... } ];
 const hashOptions: HashOptions = { ... };
 
 await apparatus.authImport(users, hashOptions);
+```
 
+```js
 /*
+apparatus.authImport(
+    AuthUser[],
+    ?HashOptions
+): Promise<void>
+
 type HashOptions = {
     // Hash algorithm used in password for these accounts
     hashAlgo?: string,

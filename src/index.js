@@ -5,8 +5,10 @@ import { authExport, authImport } from './auth';
 import type { AuthUser, HashOptions } from './auth/types';
 
 // Parameters for the Apparatus instance
-type Params = {
+type ApparatusParameters = {
+    // Firebase project ID
     projectId: string,
+    // Firebase CI token with access to projectId
     token: string
 };
 
@@ -15,7 +17,7 @@ class Apparatus {
     token: string;
     googleApi: GoogleApi;
 
-    constructor({ projectId, token }: Params) {
+    constructor({ projectId, token }: ApparatusParameters) {
         if (!projectId) {
             throw new Error('Missing projectId parameter');
         }

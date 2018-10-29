@@ -31,13 +31,18 @@
   "scripts": {
     "build": "rm -rf lib/ && babel src -d lib",
     "prepublish": "yarn run test && yarn run build",
-    "test": "yarn run test:lint && yarn run test:flow",
+    "test": "jest",
     "test:lint": "eslint src/",
-    "test:flow": "flow"
+    "test:flow": "flow",
+    "test:all": " yarn run test && yarn run test:lint && yarn run test:flow"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "babel-runtime": "^6.26.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "rootDir": "./src"
   },
   "keywords": [
     "node",

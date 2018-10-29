@@ -13,9 +13,7 @@ cache:
 
 jobs:
     include:
-        - stage: Unit tests
+        - stage: Unit tests, lint and flow
           script: yarn run test
-        - stage: Lint
-          script: yarn run test:lint
-        - stage: Flow
-          script: yarn run test:flow
+        - script: yarn run test:lint
+        - script: yarn run test:flow

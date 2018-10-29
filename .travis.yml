@@ -1,0 +1,19 @@
+git:
+    depth: 1
+
+# Use Dockerized infrastructure
+sudo: false
+
+language: node_js
+node_js:
+    - 8.11.1
+
+cache:
+    yarn: true
+
+jobs:
+    include:
+        - stage: Unit tests, lint and flow
+          script: yarn run test
+        - script: yarn run test:lint
+        - script: yarn run test:flow

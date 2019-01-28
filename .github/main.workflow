@@ -1,11 +1,11 @@
 workflow "Tests" {
   on = "push"
-  resolves = ["Build", "Lint", "Flow"]
+  resolves = ["Unit Tests", "Lint", "Flow"]
 }
 
 action "Build" {
   uses = "nuxt/actions-yarn@master"
-  args = "install"
+  args = "install --frozen-lockfile"
 }
 
 action "Unit Tests" {

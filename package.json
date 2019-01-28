@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "rm -rf lib/ && babel src -d lib",
-    "prepublish": "yarn run test:all && yarn run build",
+    "prepublishOnly": "yarn run test:all && yarn run build",
     "test": "jest",
     "test:lint": "eslint src/",
     "test:flow": "flow",

@@ -16,4 +16,4 @@ jobs:
         - stage: Unit tests, lint and flow
           script: yarn run test
         - script: yarn run test:lint
-        - script: yarn run test:flow
+        - script: yarn run test:types

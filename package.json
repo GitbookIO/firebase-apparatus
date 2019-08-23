@@ -49,5 +49,6 @@
     "tools",
     "apparatus",
     "module"
-  ]
+  ],
+  "sideEffects": false
 }

@@ -3,6 +3,8 @@
         "baseUrl": ".",
         "declaration": true,
         "downlevelIteration": true,
+        "outDir": "dist/cjs",
+        "target": "es5",
         "lib": [
             "esnext"
         ],

@@ -27,8 +27,8 @@
   "scripts": {
     "prepublish": "yarn run test:all && yarn run build",
     "build": "rm -rf ./dist && yarn run build:es && yarn run build:cjs",
+    "build:cjs": "tsc --build tsconfig.json",
     "build:es": "tsc --build tsconfig.es.json",
-    "build:cjs": "tsc --build tsconfig.cjs.json",
     "test:lint": "tslint ./src/**/*.ts",
     "test:types": "tsc --noEmit",
     "test": "jest",

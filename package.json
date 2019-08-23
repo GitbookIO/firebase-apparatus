@@ -29,7 +29,7 @@
     "build": "rm -rf ./dist && yarn run build:es && yarn run build:cjs",
     "build:es": "tsc --build tsconfig.es.json",
     "build:cjs": "tsc --build tsconfig.cjs.json",
-    "lint": "tslint ./src/**",
+    "lint": "tslint ./src/**/*.ts",
     "check:types": "tsc",
     "test": "jest",
     "test:all": "yarn run test && yarn run lint && yarn run check:types"

@@ -3,7 +3,7 @@
   "version": "0.1.1",
   "description": "Lightweight implementation of firebase-tools as a Node module",
   "main": "dist/cjs/index.js",
-  "modules": "dist/es/index.js",
+  "module": "dist/es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/GitbookIO/firebase-apparatus.git"

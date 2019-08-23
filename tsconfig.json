@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "declaration": true,
+        "downlevelIteration": true,
+        "lib": [
+            "esnext"
+        ],
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "strict": true
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

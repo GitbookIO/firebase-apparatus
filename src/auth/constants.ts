@@ -1,6 +1,4 @@
-/* @flow */
-
-import type { ProviderId } from './types';
+import { ProviderId } from './types';
 
 // Allowed exported providers
 export const ALLOWED_PROVIDERS: ProviderId[] = [
@@ -35,7 +33,7 @@ export const EXPORT_KEYS = [
 ];
 
 // Renamed keys at export
-export const EXPORT_RENAMED_KEYS: { [string]: string } = {
+export const EXPORT_RENAMED_KEYS: { [key: string]: string } = {
     lastLoginAt: 'lastSignedInAt'
 };
 
@@ -55,7 +53,7 @@ export const IMPORT_KEYS = [
 ];
 
 // Renamed keys at import
-export const IMPORT_RENAMED_KEYS: { [string]: string } = {
+export const IMPORT_RENAMED_KEYS: { [key: string]: string } = {
     lastSignedInAt: 'lastLoginAt'
 };
 

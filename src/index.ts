@@ -1,21 +1,19 @@
-/* @flow */
-
 import { GoogleApi } from './apis';
 import { authExport, authImport } from './auth';
-import type { AuthUser, HashOptions } from './auth/types';
+import { AuthUser, HashOptions } from './auth/types';
 
 // Parameters for the Apparatus instance
-type ApparatusParameters = {
+interface ApparatusParameters {
     // Firebase project ID
-    projectId: string,
-    // Firebase CI token with access to projectId
-    token: string
-};
-
-class Apparatus {
     projectId: string;
+    // Firebase CI token with access to projectId
     token: string;
-    googleApi: GoogleApi;
+}
+
+export class Apparatus {
+    public projectId: string;
+    public token: string;
+    public googleApi: GoogleApi;
 
     constructor({ projectId, token }: ApparatusParameters) {
         if (!projectId) {
@@ -36,16 +34,16 @@ class Apparatus {
      * Run the equivalent of auth:export command
      * Returns the corresponding JSON
      */
-    async authExport(): Promise<AuthUser[]> {
+    public async authExport(): Promise<AuthUser[]> {
         return authExport(this);
     }
 
     /*
      * Run the equivalent of auth:import command
      */
-    async authImport(
+    public async authImport(
         users: AuthUser[],
-        hashOptions?: HashOptions = {}
+        hashOptions: HashOptions = {}
     ): Promise<void> {
         if (!users) {
             throw new Error('Missing "users" parameter');
@@ -54,5 +52,3 @@ class Apparatus {
         return authImport(this, users, hashOptions);
     }
 }
-
-export default Apparatus;

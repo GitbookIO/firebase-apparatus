@@ -1,9 +1,7 @@
-/* @flow */
+import { GoogleHashOptions, HashOptions } from '../types';
+import { toWebSafeBase64 } from './toWebSafeBase64';
 
-import toWebSafeBase64 from './toWebSafeBase64';
-import type { HashOptions, GoogleHashOptions } from '../types';
-
-function transformHashOptions(options: HashOptions): GoogleHashOptions {
+export function transformHashOptions(options: HashOptions): GoogleHashOptions {
     if (!options.hashAlgo) {
         return {};
     }
@@ -85,5 +83,3 @@ function transformHashOptions(options: HashOptions): GoogleHashOptions {
             throw new Error(`Unsupported hash algorithm ${hashAlgo}`);
     }
 }
-
-export default transformHashOptions;

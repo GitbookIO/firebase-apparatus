@@ -1,32 +1,30 @@
-/* @flow */
-
-import axios from 'axios';
-import getOAuthToken from './getOAuthToken';
+import axios, { AxiosInstance } from 'axios';
 import { FIVE_MINUTES } from './constants';
+import { getOAuthToken } from './getOAuthToken';
 
 // Type of the stored access token for requests
-type AccessToken = {
+interface AccessToken {
     // Receveid access_token
-    token: string,
+    token: string;
     // refreshToken used for this access_token
-    refreshToken: string,
+    refreshToken: string;
     // Expiration time
-    expiresAt: number
-};
+    expiresAt: number;
+}
 
 /*
  * Main interface for an API
  */
-class Api {
-    client: axios.Axios;
-    refreshToken: string;
-    accessToken: ?AccessToken;
+export class Api {
+    public client: AxiosInstance;
+    public refreshToken: string;
+    public accessToken: AccessToken | null = null;
 
     constructor(
         baseURL: string,
         refreshToken: string,
-        opts?: Object = {}
-    ): void {
+        opts: { [key: string]: any } = {}
+    ) {
         if (!baseURL) {
             throw new Error('Missing baseURL parameter');
         }
@@ -50,7 +48,7 @@ class Api {
     }
 
     // Use last fetched access token or get a new one if necessary
-    async getAccessToken(): Promise<string> {
+    public async getAccessToken(): Promise<string> {
         // Validate that accessToken is valid
         if (
             !!this.accessToken &&
@@ -72,7 +70,7 @@ class Api {
     }
 
     // Make an authed request
-    async request(opts: Object): Promise<Object> {
+    public async request<T>(opts: { [key: string]: any }): Promise<T> {
         // Get an access token for the request
         const token = await this.getAccessToken();
         try {
@@ -93,9 +91,7 @@ class Api {
             // No response
             if (error.request) {
                 throw new Error(
-                    `No response receveid for ${
-                        error.config.method
-                    } request to ${error.config.url}`
+                    `No response receveid for ${error.config.method} request to ${error.config.url}`
                 );
             }
             // Invalid request
@@ -104,8 +100,11 @@ class Api {
     }
 
     // GET <url>
-    async get(url: string, opts?: Object = {}): Promise<Object> {
-        return this.request({
+    public async get<T>(
+        url: string,
+        opts: { [key: string]: any } = {}
+    ): Promise<T> {
+        return this.request<T>({
             ...opts,
             method: 'get',
             url
@@ -113,8 +112,12 @@ class Api {
     }
 
     // POST <url> with <data>
-    async post(url: string, data: Object, opts?: Object) {
-        return this.request({
+    public async post<T>(
+        url: string,
+        data: { [key: string]: any },
+        opts?: { [key: string]: any }
+    ) {
+        return this.request<T>({
             ...opts,
             method: 'post',
             url,
@@ -122,5 +125,3 @@ class Api {
         });
     }
 }
-
-export default Api;

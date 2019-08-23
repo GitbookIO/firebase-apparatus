@@ -1,21 +1,21 @@
-/* @flow */
-
-import querystring from 'querystring';
 import axios from 'axios';
+import querystring from 'querystring';
 import { ORIGINS } from './constants';
 
 // Type of an OAuth Google access token used for requests
-type GoogleAccessToken = {
-    access_token: string,
-    token_type: string,
-    expires_in: number,
-    id_token: string
-};
+interface GoogleAccessToken {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    id_token: string;
+}
 
 /*
  * Get an OAuth access token for the given <refreshToken>
  */
-async function getOAuthToken(refreshToken: string): Promise<GoogleAccessToken> {
+export async function getOAuthToken(
+    refreshToken: string
+): Promise<GoogleAccessToken> {
     // Create an axios client
     const client = axios.create({
         baseURL: ORIGINS.GOOGLE,
@@ -36,5 +36,3 @@ async function getOAuthToken(refreshToken: string): Promise<GoogleAccessToken> {
     );
     return data;
 }
-
-export default getOAuthToken;

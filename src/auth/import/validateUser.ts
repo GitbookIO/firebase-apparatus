@@ -1,13 +1,11 @@
-/* @flow */
-
 import {
     ALLOWED_PROVIDERS,
     ALLOWED_PROVIDERS_KEYS,
     IMPORT_KEYS
 } from '../constants';
-import type { AuthUser } from '../types';
+import { AuthUser } from '../types';
 
-function validateUser(user: AuthUser): void {
+export function validateUser(user: AuthUser): void {
     Object.keys(user).forEach(key => {
         if (!IMPORT_KEYS.includes(key)) {
             throw new Error(`Trying to import invalid key ${key}`);
@@ -18,9 +16,7 @@ function validateUser(user: AuthUser): void {
         user.providerUserInfo.forEach(providerInfo => {
             if (!ALLOWED_PROVIDERS.includes(providerInfo.providerId)) {
                 throw new Error(
-                    `Trying to import invalid provider ${
-                        providerInfo.providerId
-                    }`
+                    `Trying to import invalid provider ${providerInfo.providerId}`
                 );
             }
 
@@ -34,5 +30,3 @@ function validateUser(user: AuthUser): void {
         });
     }
 }
-
-export default validateUser;

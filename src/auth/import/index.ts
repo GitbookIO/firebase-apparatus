@@ -1,15 +1,8 @@
-/* @flow */
-
-import transformUser from './transformUser';
-import transformHashOptions from './transformHashOptions';
+import { Apparatus } from '../..';
 import { MAX_BATCH_SIZE } from '../constants';
-import type Apparatus from '../..';
-import type {
-    AuthUser,
-    GoogleUser,
-    HashOptions,
-    GoogleHashOptions
-} from '../types';
+import { AuthUser, GoogleHashOptions, GoogleUser, HashOptions } from '../types';
+import { transformHashOptions } from './transformHashOptions';
+import { transformUser } from './transformUser';
 
 /*
  * Run auth:import on Google API
@@ -50,12 +43,12 @@ async function serialAuthImport(
 /*
  * Validate options and launch import
  */
-async function authImport(
+export async function authImport(
     apparatus: Apparatus,
     // Result accumulator to iterate
     users: AuthUser[],
     // Hash options
-    hashOptions?: HashOptions = {}
+    hashOptions: HashOptions = {}
 ): Promise<void> {
     // Validate options and transform for Google API
     const googleHashOpts = transformHashOptions(hashOptions);
@@ -65,5 +58,3 @@ async function authImport(
 
     await serialAuthImport(apparatus, googleUsers, googleHashOpts);
 }
-
-export default authImport;

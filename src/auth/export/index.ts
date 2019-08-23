@@ -1,17 +1,15 @@
-/* @flow */
-
-import transformUser from './transformUser';
+import { Apparatus } from '../..';
 import { MAX_BATCH_SIZE } from '../constants';
-import type Apparatus from '../..';
-import type { AuthUser } from '../types';
+import { AuthUser, GoogleUser } from '../types';
+import { transformUser } from './transformUser';
 
 /*
  * Run auth:export on Google API
  */
-async function authExport(
+export async function authExport(
     apparatus: Apparatus,
     // Result accumulator to iterate
-    users?: AuthUser[] = [],
+    users: AuthUser[] = [],
     // Received token from API to iterate
     nextPage?: string
 ): Promise<AuthUser[]> {
@@ -25,10 +23,10 @@ async function authExport(
     const {
         users: googleUsers,
         nextPageToken
-    } = await apparatus.googleApi.post(
-        '/identitytoolkit/v3/relyingparty/downloadAccount',
-        data
-    );
+    } = await apparatus.googleApi.post<{
+        users: GoogleUser[];
+        nextPageToken: string;
+    }>('/identitytoolkit/v3/relyingparty/downloadAccount', data);
 
     // Return if no more results
     if (!googleUsers || !googleUsers.length) {
@@ -39,5 +37,3 @@ async function authExport(
     const newAcc = users.concat(googleUsers.map(transformUser));
     return authExport(apparatus, newAcc, nextPageToken);
 }
-
-export default authExport;

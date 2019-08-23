@@ -1,25 +1,23 @@
-/* @flow */
-
-import toWebSafeBase64 from './toWebSafeBase64';
-import validateUser from './validateUser';
 import {
     ALLOWED_PROVIDERS,
     ALLOWED_PROVIDERS_KEYS,
+    BASE64_KEYS,
     IMPORT_KEYS,
-    IMPORT_RENAMED_KEYS,
-    BASE64_KEYS
+    IMPORT_RENAMED_KEYS
 } from '../constants';
-import type { AuthUser, GoogleUser } from '../types';
+import { AuthUser, GoogleProviderUserInfo, GoogleUser } from '../types';
+import { toWebSafeBase64 } from './toWebSafeBase64';
+import { validateUser } from './validateUser';
 
 /*
  * Transform an <AuthUser> to a Google API user
  */
-function transformUser(user: AuthUser): GoogleUser {
+export function transformUser(user: AuthUser): GoogleUser {
     // Validate user before transform
     validateUser(user);
 
     // Convert user
-    const googleUser = {};
+    const googleUser: Partial<GoogleUser> = {};
     IMPORT_KEYS.forEach(key => {
         const value = user[key];
         // Ignore missing value
@@ -35,7 +33,6 @@ function transformUser(user: AuthUser): GoogleUser {
 
         // Rename key
         const newKey = IMPORT_RENAMED_KEYS[key] || key;
-        // $FlowFixMe
         googleUser[newKey] = googleValue;
     });
 
@@ -44,17 +41,14 @@ function transformUser(user: AuthUser): GoogleUser {
         googleUser.providerUserInfo = user.providerUserInfo
             .filter(({ providerId }) => ALLOWED_PROVIDERS.includes(providerId))
             .map(providerInfo => {
-                const googleProviderInfo = {};
+                const googleProviderInfo: Partial<GoogleProviderUserInfo> = {};
                 ALLOWED_PROVIDERS_KEYS.forEach(key => {
                     googleProviderInfo[key] = providerInfo[key];
                 });
 
-                return googleProviderInfo;
+                return googleProviderInfo as GoogleProviderUserInfo;
             });
     }
 
-    // $FlowFixMe
-    return googleUser;
+    return googleUser as GoogleUser;
 }
-
-export default transformUser;

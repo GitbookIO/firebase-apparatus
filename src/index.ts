@@ -10,7 +10,7 @@ interface ApparatusParameters {
     token: string;
 }
 
-class Apparatus {
+export class Apparatus {
     public projectId: string;
     public token: string;
     public googleApi: GoogleApi;
@@ -52,5 +52,3 @@ class Apparatus {
         return authImport(this, users, hashOptions);
     }
 }
-
-export default Apparatus;

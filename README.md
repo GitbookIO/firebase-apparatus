@@ -17,7 +17,7 @@ $ yarn add firebase-apparatus
 ## Usage
 
 ```js
-import Apparatus from 'firebase-apparatus';
+import { Apparatus } from 'firebase-apparatus';
 
 const apparatus = new Apparatus({
     projectId: 'my-firebase-project',

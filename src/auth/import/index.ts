@@ -1,4 +1,4 @@
-import Apparatus from '../..';
+import { Apparatus } from '../..';
 import { MAX_BATCH_SIZE } from '../constants';
 import { AuthUser, GoogleHashOptions, GoogleUser, HashOptions } from '../types';
 import { transformHashOptions } from './transformHashOptions';

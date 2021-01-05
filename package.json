@@ -35,7 +35,7 @@
     "test:all": "yarn run test && yarn run test:lint && yarn run test:types"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "babel-runtime": "^6.26.0"
   },
   "jest": {
